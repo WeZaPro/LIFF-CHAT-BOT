@@ -13,6 +13,10 @@
 
     <!-- <h3>userId</h3>
     <p>{{ this.userId_queryString }}</p> -->
+
+    <div id="btnB">
+      <button @click="sendMsg">Start Chat</button>
+    </div>
   </div>
 
   <div id="app">
@@ -37,9 +41,13 @@
     <button @click="openLineChat">GOTO Line@</button>
   </div>
 
-  <a href="https://line.me/ti/p/@798hmctv">
+  <!-- <div id="btnB">
+    <button @click="sendMsg">Start Chat</button>
+  </div> -->
+
+  <!-- <a href="https://line.me/ti/p/@798hmctv">
     <button id="btn">LINE @</button>
-  </a>
+  </a> -->
 </template>
 
 <script>
@@ -191,7 +199,7 @@ export default {
 
                 //next after save db
                 //redirect to chat room
-                this.sendMsg()
+                //this.sendMsg()
               }
             })
           }
