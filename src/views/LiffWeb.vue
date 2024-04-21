@@ -191,6 +191,7 @@ export default {
 
                 //next after save db
                 //redirect to chat room
+                this.sendMsg()
               }
             })
           }
