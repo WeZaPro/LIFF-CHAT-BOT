@@ -1,22 +1,17 @@
 <template>
   <div id="header">
-    <h3>HI CONGRATULATIONS LIFF IN 5555e</h3>
+    <h3>HI CONGRATULATIONS LIFF ACRYLIC</h3>
     <p>{{ profile.displayName }}</p>
     <h3>lineUserId</h3>
     <p>{{ profile.userId }}</p>
-    <h3>botUserId:</h3>
-    <p>{{ this.qryStringBotUid }}</p>
     <h3>ipAddress</h3>
     <p>{{ this._getIpAddress }}</p>
     <h3>os</h3>
     <p>{{ this.os }}</p>
-
-    <!-- <h3>userId</h3>
-    <p>{{ this.userId_queryString }}</p> -->
-
-    <div id="btnB">
-      <button @click="sendMsg">Start Chat</button>
-    </div>
+    <h3>param username</h3>
+    <p>{{ this.paramQryUserName }}</p>
+    <h3>param phone</h3>
+    <p>{{ this.paramQryPhone }}</p>
   </div>
 
   <div id="app">
@@ -30,24 +25,8 @@
     <p id="displayName">{{ profile.displayName }}</p>
     <p id="userId">{{ profile.userId }}</p>
     <p id="os">{{ os }}</p>
-    <p id="botUserId">{{ this.botUserId }}</p>
-    <!-- <p id="ipAddress">{{ this.ipAddress }}</p>
-    <p id="userAgent">{{ this.userAgent }}</p>
-    <p id="sessionId">{{ this._sessionId }}</p> -->
-
-    <!-- <p>param : {{ this.getParam }}</p> -->
+    <p id="query param">{{ paramQryUserName }}</p>
   </div>
-  <div id="btnA">
-    <button @click="openLineChat">GOTO Line@</button>
-  </div>
-
-  <!-- <div id="btnB">
-    <button @click="sendMsg">Start Chat</button>
-  </div> -->
-
-  <!-- <a href="https://line.me/ti/p/@798hmctv">
-    <button id="btn">LINE @</button>
-  </a> -->
 </template>
 
 <script>
@@ -62,6 +41,8 @@ export default {
   },
   data() {
     return {
+      paramQryUserName: '',
+      paramQryPhone: '',
       imageProfile: '',
       os: '',
       loggedIn: false,
@@ -114,8 +95,13 @@ export default {
     this.qryStringBotUid = this.$route.query.botUserId
     this.liffAdd()
     this.getIpAddress()
-    // goto line oa
-    // this.openLineChat()
+    // param query sctring
+    const params = new URLSearchParams(window.location.search)
+    console.log(' params---> ', params.get('username'))
+    let username_param = params.get('username')
+    let phone_param = params.get('phone')
+    this.paramQryUserName = username_param
+    this.paramQryPhone = phone_param
   },
   methods: {
     openLineChat() {
@@ -138,7 +124,7 @@ export default {
     },
     async liffAdd() {
       await liff
-        .init({ liffId: '1656824759-lWmGEYa5' })
+        .init({ liffId: '1657499945-BMr9RMVe' })
         .then(() => {
           if (!liff.isLoggedIn()) {
             liff.login()
@@ -164,22 +150,7 @@ export default {
                 }
 
                 // redirect to line OA
-
-                console.log('this os is web')
-                console.log('gtm_data_onWeb --> ', gtm_data_onWeb)
-
-                //alert('this os -->', liff.getOS())
-                // todo on web
-                // qry_ipAddress from Mongo *******
-                // findAndUpdate
-                // update gtm_data_onWeb to Mongo
-
-                //next after save db
-                // redirect to line app with qrcode
-
-                // save db *** findAndUpdate ****
-                //this.saveAudience()
-                this.openLineChat()
+                //this.openLineChat()
               } else {
                 var gtm_data_onMobile = {
                   botUserId: this.$route.query.botUserId, //use รับค่าจาก api
